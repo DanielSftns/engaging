@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @font-face {
+            font-family: "Avenir";
+            src: url("./Avenir.ttc");
+        }
+        
+        body {
+            font-family: 'Avenir';
+        }
+        
+        .intro {
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            padding: 2em 3em;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .content {
+            padding: 2em;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .copy {
+            color: #fff;
+            line-height: 1.2em;
+            opacity: 0;
+            padding-bottom: 1em;
+        }
+        
+        .copy .row {
+            display: block;
+        }
+        
+        .button {
+            line-height: 1.2em;
+            color: #fff;
+            background-color: transparent;
+            text-decoration: underline;
+            border-radius: 0.2em;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: fixed;
+            z-index: 10;
+            opacity: 0;
+        }
+        
+        .button-fixed {
+            padding: 0.5em 1em;
+            line-height: 1.2em;
+            color: #fff;
+            background-color: #265bbc;
+            border-radius: 0.2em;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: fixed;
+            z-index: 10;
+            opacity: 0;
+            transform: scale(0.3);
+            transform-origin: right top;
+        }
+        
+        .logo {
+            fill: #fff;
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .logo-fixed {
+            fill: #fff;
+            width: 50%;
+            transform: scale(0.2);
+            transform-origin: left top;
+            position: fixed;
+            z-index: 10;
+            top: 2em;
+            left: 3em;
+            opacity: 0;
+            overflow: hidden;
+        }
+        
+        .cover1,
+        .cover2 {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background-color: #000;
+            z-index: 2;
+            left: 0;
+            box-shadow: 0 0 0 5px #000;
+        }
+        
+        .cover1 {
+            top: 0;
+        }
+        
+        .cover2 {
+            bottom: 0;
+        }
+        
+        .navFixed {
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 9;
+            opacity: 0;
+        }
+        
+        @media (max-width: 800px) {
+            .intro {
+                padding: 1em 2em;
+            }
+            .logo {
+                width: 80%;
+            }
+            .logo-fixed {
+                top: 1em;
+                left: 2em;
+                width: 80%;
+            }
+        }
+    </style>
+    <div class="logo-fixed">
+        <svg id="big" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 808 201.69">
+            <g>
+                <path d="M91.2,62a41,41,0,0,0-15-10.76,50.15,50.15,0,0,0-19.74-3.77,64,64,0,0,0-22.05,3.77A52.89,52.89,0,0,0,16.4,62a50.34,50.34,0,0,0-12,16.82A53.12,53.12,0,0,0,0,100.77a53.07,53.07,0,0,0,4.39,21.94,50.24,50.24,0,0,0,12,16.82,52.89,52.89,0,0,0,18,10.76,64,64,0,0,0,22.05,3.76,57,57,0,0,0,23.81-5.22,50.12,50.12,0,0,0,19-14.83L77.31,117.91a35.25,35.25,0,0,1-9.3,8.88A23.54,23.54,0,0,1,55,130.24a23.06,23.06,0,0,1-15.46-5.33,24.77,24.77,0,0,1-8.15-14.31h72.71v-9.83a68,68,0,0,0-3.34-21.93A49,49,0,0,0,91.2,62ZM31.34,89.28a19.91,19.91,0,0,1,1.78-7.21,18.88,18.88,0,0,1,4.38-6,22.78,22.78,0,0,1,16-6,18.59,18.59,0,0,1,14,5.64,18.14,18.14,0,0,1,5.22,13.58Z"/>
+                <path d="M207.08,61.29a27.88,27.88,0,0,0-11.39-10.14q-7.32-3.65-19.22-3.65A35.91,35.91,0,0,0,166,49a36.87,36.87,0,0,0-8.57,3.76A30.43,30.43,0,0,0,151,57.94a25,25,0,0,0-4.18,5.85h-.42V50H116.29V151.55h31.34V101a70.84,70.84,0,0,1,.63-9.61,24.06,24.06,0,0,1,2.61-8.25,15,15,0,0,1,5.75-5.85,19.33,19.33,0,0,1,9.82-2.19q6.06,0,9.3,2.5a15,15,0,0,1,4.8,6.48,28.59,28.59,0,0,1,1.88,8.67q.32,4.69.32,9.09v49.73h31.34v-56a115.26,115.26,0,0,0-1.47-19A41,41,0,0,0,207.08,61.29Z"/>
+                <path d="M436.91,61.08A33,33,0,0,0,422.7,50.94Q413.82,47.51,400,47.5a73.07,73.07,0,0,0-24.23,4.07A57.49,57.49,0,0,0,355.32,63.8L372,80.93A38.58,38.58,0,0,1,383.43,72a30.73,30.73,0,0,1,14.1-3.23,21.49,21.49,0,0,1,14.1,4.91q6,4.91,6,13.26c-4.32,0-9,.08-14.11.21a142.49,142.49,0,0,0-15.25,1.26,93.76,93.76,0,0,0-14.73,3.23,43.62,43.62,0,0,0-12.64,6.17,29,29,0,0,0-8.78,10q-3.24,6.06-3.23,14.84a29.93,29.93,0,0,0,2.92,13.57,28.64,28.64,0,0,0,7.94,9.82,34.39,34.39,0,0,0,11.6,6,47.2,47.2,0,0,0,13.68,2,47.7,47.7,0,0,0,18.28-3.55,29.39,29.39,0,0,0,13.9-11.7h.42v12.75h28.83V99.94a107.89,107.89,0,0,0-2.09-22.46A39,39,0,0,0,436.91,61.08Zm-19.32,52.65a16.92,16.92,0,0,1-2,8.36,17.09,17.09,0,0,1-5.33,5.85,26.7,26.7,0,0,1-7.62,3.55,31.7,31.7,0,0,1-8.88,1.25,20.08,20.08,0,0,1-10-2.71,9,9,0,0,1-4.81-8.36,10.11,10.11,0,0,1,3.45-8.15,22.83,22.83,0,0,1,8.36-4.39A45.34,45.34,0,0,1,401,107.36q5.34-.31,8.89-.32h7.73Z"/>
+                <path d="M540.33,63.38h-.42a32.78,32.78,0,0,0-5-5.54,36.29,36.29,0,0,0-7.52-5.12,47.19,47.19,0,0,0-22.14-5.22A41.16,41.16,0,0,0,485.79,52,46,46,0,0,0,471.27,63.8a53.56,53.56,0,0,0-9.19,16.92,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.55,21.1,48.37,48.37,0,0,0,10.14,16.61,45.56,45.56,0,0,0,15.77,10.87,52.26,52.26,0,0,0,20.47,3.86,43,43,0,0,0,15.15-3,29.47,29.47,0,0,0,13.48-10.34h.42v9.82q0,10.86-6.79,17.86t-21.21,7a43.15,43.15,0,0,1-17.65-3.55A65.39,65.39,0,0,1,476.81,161l-17.34,25.91a60.5,60.5,0,0,0,24.23,11.8,118.88,118.88,0,0,0,26.75,3q29.67,0,44.19-14.94T569.16,143V50H540.33Zm-1.88,46.28a24.82,24.82,0,0,1-5.33,7.94,27.34,27.34,0,0,1-8,5.53,24.35,24.35,0,0,1-19.74,0,27.62,27.62,0,0,1-7.94-5.53,24.65,24.65,0,0,1,0-34.9,27.43,27.43,0,0,1,7.94-5.53,24.35,24.35,0,0,1,19.74,0,27.15,27.15,0,0,1,8,5.53,24.82,24.82,0,0,1,5.33,7.94,25,25,0,0,1,0,19Z"/>
+                <path d="M307.77,63.38h-.42a32.27,32.27,0,0,0-5-5.54,36.55,36.55,0,0,0-7.52-5.12,47.28,47.28,0,0,0-22.15-5.22A41.15,41.15,0,0,0,253.24,52,46.17,46.17,0,0,0,238.71,63.8a53.76,53.76,0,0,0-9.19,16.92,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.56,21.1A48.2,48.2,0,0,0,240,138.07a45.6,45.6,0,0,0,15.78,10.87,52.23,52.23,0,0,0,20.47,3.86,43,43,0,0,0,15.15-3,29.57,29.57,0,0,0,13.48-10.34h.41v9.82q0,10.86-6.78,17.86t-21.21,7a43.19,43.19,0,0,1-17.66-3.55A65.59,65.59,0,0,1,244.25,161l-17.34,25.91a60.48,60.48,0,0,0,24.24,11.8,118.79,118.79,0,0,0,26.74,3q29.67,0,44.19-14.94T336.61,143V50H307.77Zm-1.88,46.28a24.5,24.5,0,0,1-5.33,7.94,27.3,27.3,0,0,1-8,5.53,24.37,24.37,0,0,1-19.75,0,27.76,27.76,0,0,1-7.94-5.53,24.82,24.82,0,0,1-5.33-7.94,25.12,25.12,0,0,1,0-19,24.82,24.82,0,0,1,5.33-7.94,27.56,27.56,0,0,1,7.94-5.53,24.37,24.37,0,0,1,19.75,0,27.11,27.11,0,0,1,8,5.53,24.81,24.81,0,0,1,5.33,27Z"/>
+                <path d="M676.58,61.43A27.7,27.7,0,0,0,665.22,51.3q-7.31-3.66-19.18-3.66a35.82,35.82,0,0,0-10.43,1.46,37.33,37.33,0,0,0-8.55,3.76,30.71,30.71,0,0,0-6.46,5.23,26,26,0,0,0-3.68,5v-13H585.65V151.69h31.61V101.12a70.59,70.59,0,0,1,.63-9.6,24,24,0,0,1,2.61-8.26,15,15,0,0,1,5.73-5.85,19.28,19.28,0,0,1,9.8-2.19c4,0,7.12.83,9.28,2.51a15,15,0,0,1,4.79,6.47A28.59,28.59,0,0,1,652,92.88q.32,4.7.31,9.08v49.73h31.28v-56a116.4,116.4,0,0,0-1.46-19A41.18,41.18,0,0,0,676.58,61.43Z"/>
+                <path d="M779.16,50V63.38h-.41a32.78,32.78,0,0,0-5-5.54,36.29,36.29,0,0,0-7.52-5.12,47.2,47.2,0,0,0-22.15-5.22A41.27,41.27,0,0,0,724.63,52a46.12,46.12,0,0,0-14.52,11.8,53.72,53.72,0,0,0-9.19,16.93,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.55,21.1,48.6,48.6,0,0,0,10.13,16.61,45.53,45.53,0,0,0,15.78,10.86,52,52,0,0,0,20.47,3.87,43,43,0,0,0,15.15-3,29.4,29.4,0,0,0,13.48-10.34h.42v9.82q0,10.86-6.79,17.86t-21.21,7A43.19,43.19,0,0,1,731,170.56,65.54,65.54,0,0,1,715.65,161L698.3,186.86a60.61,60.61,0,0,0,24.24,11.8,118.88,118.88,0,0,0,26.75,3q29.65,0,44.19-14.94T808,143V50Zm-1.87,59.66A24.82,24.82,0,0,1,772,117.6a27.34,27.34,0,0,1-8.05,5.53,24.35,24.35,0,0,1-19.74,0,27.49,27.49,0,0,1-7.94-5.53,24.65,24.65,0,0,1,0-34.9,27.29,27.29,0,0,1,7.94-5.53,24.35,24.35,0,0,1,19.74,0A27.15,27.15,0,0,1,772,82.7a24.82,24.82,0,0,1,5.33,7.94,25.12,25.12,0,0,1,0,19Z"/>
+                <path d="M601.28,36.36A17.51,17.51,0,0,0,614.13,31a17.49,17.49,0,0,0,5.33-12.85,17.47,17.47,0,0,0-5.33-12.85,18.15,18.15,0,0,0-25.7,0,17.5,17.5,0,0,0-5.32,12.85A17.52,17.52,0,0,0,588.43,31,17.54,17.54,0,0,0,601.28,36.36Z"/>
+            </g>
+        </svg>
+        <svg id="mini" style="opacity:0;transform-origin: left top; transform: scale(0.3);position:absolute;left:0;top:0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504.21 414.71">
+            <g>
+                <path d="M302.38,0V91.46q82.8,7.08,89.89,89.87c-1.58,0-7.89-1.57-15.78-1.57-63.07,0-88.29,15.77-88.29,113.53s25.22,121.42,105.64,121.42c85.15,0,110.37-26.8,110.37-157.69,0-162.4-63.07-252.3-201.83-257"/>
+                <path d="M216,121.42C216,23.66,190.8,0,110.38,0,25.23,0,0,26.81,0,157.7,0,320.1,63.07,410,201.84,414.71V323.26Q119,316.16,112,233.38c1.57,0,7.89,1.57,15.78,1.57C190.8,235,216,219.19,216,121.42"/>
+            </g>
+        </svg>
+    </div>
+    <button class="bigText button-fixed">Let's connect.</button>
+    <button class="bigText button">Let's connect.</button>
+    <section class="intro">
+        <div class="logo">
+            <div class="cover1"></div>
+            <div class="cover2"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 808 201.69">
+                <defs>
+                    <linearGradient id="Medium_Spectrum_" x1="783.95" y1="-95.5" x2="-281.2" y2="191.58" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#71caee"/>
+                        <stop offset="0.2" stop-color="#8881b8"/>
+                        <stop offset="0.4" stop-color="#ec98ba"/>
+                        <stop offset="0.6" stop-color="#ee9579"/>
+                        <stop offset="0.8" stop-color="#fcf099"/>
+                        <stop offset="1" stop-color="#83c59b"/>
+                    </linearGradient>
+                    <linearGradient id="Medium_Spectrum_2" x1="791.37" y1="-67.99" x2="-273.79" y2="219.09" xlink:href="#Medium_Spectrum_"/>
+                    <linearGradient id="Medium_Spectrum_3" x1="808.19" y1="-5.56" x2="-256.96" y2="281.52" xlink:href="#Medium_Spectrum_"/>
+                    <linearGradient id="Medium_Spectrum_4" x1="820.77" y1="41.1" x2="-244.39" y2="328.17" xlink:href="#Medium_Spectrum_"/>
+                    <linearGradient id="Medium_Spectrum_5" x1="805.02" y1="-17.34" x2="-260.14" y2="269.74" xlink:href="#Medium_Spectrum_"/>
+                    <linearGradient id="Medium_Spectrum_6" x1="823.19" y1="50.09" x2="-241.96" y2="337.17" xlink:href="#Medium_Spectrum_"/>
+                    <linearGradient id="Medium_Spectrum_7" x1="836.94" y1="101.11" x2="-228.21" y2="388.18" xlink:href="#Medium_Spectrum_"/>
+                    <linearGradient id="linear-gradient" x1="800.15" y1="-35.42" x2="-265.01" y2="251.66" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#71caee"/>
+                        <stop offset="0.6" stop-color="#ee9579"/>
+                        <stop offset="0.8" stop-color="#fcf099"/>
+                        <stop offset="1" stop-color="#83c59b"/>
+                    </linearGradient>
+                </defs>
+                <g>
+                    <path d="M91.2,62a41,41,0,0,0-15-10.76,50.15,50.15,0,0,0-19.74-3.77,64,64,0,0,0-22.05,3.77A52.89,52.89,0,0,0,16.4,62a50.34,50.34,0,0,0-12,16.82A53.12,53.12,0,0,0,0,100.77a53.07,53.07,0,0,0,4.39,21.94,50.24,50.24,0,0,0,12,16.82,52.89,52.89,0,0,0,18,10.76,64,64,0,0,0,22.05,3.76,57,57,0,0,0,23.81-5.22,50.12,50.12,0,0,0,19-14.83L77.31,117.91a35.25,35.25,0,0,1-9.3,8.88A23.54,23.54,0,0,1,55,130.24a23.06,23.06,0,0,1-15.46-5.33,24.77,24.77,0,0,1-8.15-14.31h72.71v-9.83a68,68,0,0,0-3.34-21.93A49,49,0,0,0,91.2,62ZM31.34,89.28a19.91,19.91,0,0,1,1.78-7.21,18.88,18.88,0,0,1,4.38-6,22.78,22.78,0,0,1,16-6,18.59,18.59,0,0,1,14,5.64,18.14,18.14,0,0,1,5.22,13.58Z"/>
+                    <path d="M207.08,61.29a27.88,27.88,0,0,0-11.39-10.14q-7.32-3.65-19.22-3.65A35.91,35.91,0,0,0,166,49a36.87,36.87,0,0,0-8.57,3.76A30.43,30.43,0,0,0,151,57.94a25,25,0,0,0-4.18,5.85h-.42V50H116.29V151.55h31.34V101a70.84,70.84,0,0,1,.63-9.61,24.06,24.06,0,0,1,2.61-8.25,15,15,0,0,1,5.75-5.85,19.33,19.33,0,0,1,9.82-2.19q6.06,0,9.3,2.5a15,15,0,0,1,4.8,6.48,28.59,28.59,0,0,1,1.88,8.67q.32,4.69.32,9.09v49.73h31.34v-56a115.26,115.26,0,0,0-1.47-19A41,41,0,0,0,207.08,61.29Z"/>
+                    <path d="M436.91,61.08A33,33,0,0,0,422.7,50.94Q413.82,47.51,400,47.5a73.07,73.07,0,0,0-24.23,4.07A57.49,57.49,0,0,0,355.32,63.8L372,80.93A38.58,38.58,0,0,1,383.43,72a30.73,30.73,0,0,1,14.1-3.23,21.49,21.49,0,0,1,14.1,4.91q6,4.91,6,13.26c-4.32,0-9,.08-14.11.21a142.49,142.49,0,0,0-15.25,1.26,93.76,93.76,0,0,0-14.73,3.23,43.62,43.62,0,0,0-12.64,6.17,29,29,0,0,0-8.78,10q-3.24,6.06-3.23,14.84a29.93,29.93,0,0,0,2.92,13.57,28.64,28.64,0,0,0,7.94,9.82,34.39,34.39,0,0,0,11.6,6,47.2,47.2,0,0,0,13.68,2,47.7,47.7,0,0,0,18.28-3.55,29.39,29.39,0,0,0,13.9-11.7h.42v12.75h28.83V99.94a107.89,107.89,0,0,0-2.09-22.46A39,39,0,0,0,436.91,61.08Zm-19.32,52.65a16.92,16.92,0,0,1-2,8.36,17.09,17.09,0,0,1-5.33,5.85,26.7,26.7,0,0,1-7.62,3.55,31.7,31.7,0,0,1-8.88,1.25,20.08,20.08,0,0,1-10-2.71,9,9,0,0,1-4.81-8.36,10.11,10.11,0,0,1,3.45-8.15,22.83,22.83,0,0,1,8.36-4.39A45.34,45.34,0,0,1,401,107.36q5.34-.31,8.89-.32h7.73Z"/>
+                    <path d="M540.33,63.38h-.42a32.78,32.78,0,0,0-5-5.54,36.29,36.29,0,0,0-7.52-5.12,47.19,47.19,0,0,0-22.14-5.22A41.16,41.16,0,0,0,485.79,52,46,46,0,0,0,471.27,63.8a53.56,53.56,0,0,0-9.19,16.92,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.55,21.1,48.37,48.37,0,0,0,10.14,16.61,45.56,45.56,0,0,0,15.77,10.87,52.26,52.26,0,0,0,20.47,3.86,43,43,0,0,0,15.15-3,29.47,29.47,0,0,0,13.48-10.34h.42v9.82q0,10.86-6.79,17.86t-21.21,7a43.15,43.15,0,0,1-17.65-3.55A65.39,65.39,0,0,1,476.81,161l-17.34,25.91a60.5,60.5,0,0,0,24.23,11.8,118.88,118.88,0,0,0,26.75,3q29.67,0,44.19-14.94T569.16,143V50H540.33Zm-1.88,46.28a24.82,24.82,0,0,1-5.33,7.94,27.34,27.34,0,0,1-8,5.53,24.35,24.35,0,0,1-19.74,0,27.62,27.62,0,0,1-7.94-5.53,24.65,24.65,0,0,1,0-34.9,27.43,27.43,0,0,1,7.94-5.53,24.35,24.35,0,0,1,19.74,0,27.15,27.15,0,0,1,8,5.53,24.82,24.82,0,0,1,5.33,7.94,25,25,0,0,1,0,19Z"/>
+                    <path d="M307.77,63.38h-.42a32.27,32.27,0,0,0-5-5.54,36.55,36.55,0,0,0-7.52-5.12,47.28,47.28,0,0,0-22.15-5.22A41.15,41.15,0,0,0,253.24,52,46.17,46.17,0,0,0,238.71,63.8a53.76,53.76,0,0,0-9.19,16.92,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.56,21.1A48.2,48.2,0,0,0,240,138.07a45.6,45.6,0,0,0,15.78,10.87,52.23,52.23,0,0,0,20.47,3.86,43,43,0,0,0,15.15-3,29.57,29.57,0,0,0,13.48-10.34h.41v9.82q0,10.86-6.78,17.86t-21.21,7a43.19,43.19,0,0,1-17.66-3.55A65.59,65.59,0,0,1,244.25,161l-17.34,25.91a60.48,60.48,0,0,0,24.24,11.8,118.79,118.79,0,0,0,26.74,3q29.67,0,44.19-14.94T336.61,143V50H307.77Zm-1.88,46.28a24.5,24.5,0,0,1-5.33,7.94,27.3,27.3,0,0,1-8,5.53,24.37,24.37,0,0,1-19.75,0,27.76,27.76,0,0,1-7.94-5.53,24.82,24.82,0,0,1-5.33-7.94,25.12,25.12,0,0,1,0-19,24.82,24.82,0,0,1,5.33-7.94,27.56,27.56,0,0,1,7.94-5.53,24.37,24.37,0,0,1,19.75,0,27.11,27.11,0,0,1,8,5.53,24.81,24.81,0,0,1,5.33,27Z"/>
+                    <path d="M676.58,61.43A27.7,27.7,0,0,0,665.22,51.3q-7.31-3.66-19.18-3.66a35.82,35.82,0,0,0-10.43,1.46,37.33,37.33,0,0,0-8.55,3.76,30.71,30.71,0,0,0-6.46,5.23,26,26,0,0,0-3.68,5v-13H585.65V151.69h31.61V101.12a70.59,70.59,0,0,1,.63-9.6,24,24,0,0,1,2.61-8.26,15,15,0,0,1,5.73-5.85,19.28,19.28,0,0,1,9.8-2.19c4,0,7.12.83,9.28,2.51a15,15,0,0,1,4.79,6.47A28.59,28.59,0,0,1,652,92.88q.32,4.7.31,9.08v49.73h31.28v-56a116.4,116.4,0,0,0-1.46-19A41.18,41.18,0,0,0,676.58,61.43Z"/>
+                    <path d="M779.16,50V63.38h-.41a32.78,32.78,0,0,0-5-5.54,36.29,36.29,0,0,0-7.52-5.12,47.2,47.2,0,0,0-22.15-5.22A41.27,41.27,0,0,0,724.63,52a46.12,46.12,0,0,0-14.52,11.8,53.72,53.72,0,0,0-9.19,16.93,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.55,21.1,48.6,48.6,0,0,0,10.13,16.61,45.53,45.53,0,0,0,15.78,10.86,52,52,0,0,0,20.47,3.87,43,43,0,0,0,15.15-3,29.4,29.4,0,0,0,13.48-10.34h.42v9.82q0,10.86-6.79,17.86t-21.21,7A43.19,43.19,0,0,1,731,170.56,65.54,65.54,0,0,1,715.65,161L698.3,186.86a60.61,60.61,0,0,0,24.24,11.8,118.88,118.88,0,0,0,26.75,3q29.65,0,44.19-14.94T808,143V50Zm-1.87,59.66A24.82,24.82,0,0,1,772,117.6a27.34,27.34,0,0,1-8.05,5.53,24.35,24.35,0,0,1-19.74,0,27.49,27.49,0,0,1-7.94-5.53,24.65,24.65,0,0,1,0-34.9,27.29,27.29,0,0,1,7.94-5.53,24.35,24.35,0,0,1,19.74,0A27.15,27.15,0,0,1,772,82.7a24.82,24.82,0,0,1,5.33,7.94,25.12,25.12,0,0,1,0,19Z"/>
+                    <path d="M601.28,36.36A17.51,17.51,0,0,0,614.13,31a17.49,17.49,0,0,0,5.33-12.85,17.47,17.47,0,0,0-5.33-12.85,18.15,18.15,0,0,0-25.7,0,17.5,17.5,0,0,0-5.32,12.85A17.52,17.52,0,0,0,588.43,31,17.54,17.54,0,0,0,601.28,36.36Z"/>
+                </g>
+                <g id="fullColor" style="opacity: 0;">
+                    <path d="M91.2,62a41,41,0,0,0-15-10.76,50.15,50.15,0,0,0-19.74-3.77,64,64,0,0,0-22.05,3.77A52.89,52.89,0,0,0,16.4,62a50.34,50.34,0,0,0-12,16.82A53.12,53.12,0,0,0,0,100.77a53.07,53.07,0,0,0,4.39,21.94,50.24,50.24,0,0,0,12,16.82,52.89,52.89,0,0,0,18,10.76,64,64,0,0,0,22.05,3.76,57,57,0,0,0,23.81-5.22,50.12,50.12,0,0,0,19-14.83L77.31,117.91a35.25,35.25,0,0,1-9.3,8.88A23.54,23.54,0,0,1,55,130.24a23.06,23.06,0,0,1-15.46-5.33,24.77,24.77,0,0,1-8.15-14.31h72.71v-9.83a68,68,0,0,0-3.34-21.93A49,49,0,0,0,91.2,62ZM31.34,89.28a19.91,19.91,0,0,1,1.78-7.21,18.88,18.88,0,0,1,4.38-6,22.78,22.78,0,0,1,16-6,18.59,18.59,0,0,1,14,5.64,18.14,18.14,0,0,1,5.22,13.58Z" style="fill:url(#Medium_Spectrum_)"/>
+                    <path d="M207.08,61.29a27.88,27.88,0,0,0-11.39-10.14q-7.32-3.65-19.22-3.65A35.91,35.91,0,0,0,166,49a36.87,36.87,0,0,0-8.57,3.76A30.43,30.43,0,0,0,151,57.94a25,25,0,0,0-4.18,5.85h-.42V50H116.29V151.55h31.34V101a70.84,70.84,0,0,1,.63-9.61,24.06,24.06,0,0,1,2.61-8.25,15,15,0,0,1,5.75-5.85,19.33,19.33,0,0,1,9.82-2.19q6.06,0,9.3,2.5a15,15,0,0,1,4.8,6.48,28.59,28.59,0,0,1,1.88,8.67q.32,4.69.32,9.09v49.73h31.34v-56a115.26,115.26,0,0,0-1.47-19A41,41,0,0,0,207.08,61.29Z" style="fill:url(#Medium_Spectrum_2)"/>
+                    <path d="M436.91,61.08A33,33,0,0,0,422.7,50.94Q413.82,47.51,400,47.5a73.07,73.07,0,0,0-24.23,4.07A57.49,57.49,0,0,0,355.32,63.8L372,80.93A38.58,38.58,0,0,1,383.43,72a30.73,30.73,0,0,1,14.1-3.23,21.49,21.49,0,0,1,14.1,4.91q6,4.91,6,13.26c-4.32,0-9,.08-14.11.21a142.49,142.49,0,0,0-15.25,1.26,93.76,93.76,0,0,0-14.73,3.23,43.62,43.62,0,0,0-12.64,6.17,29,29,0,0,0-8.78,10q-3.24,6.06-3.23,14.84a29.93,29.93,0,0,0,2.92,13.57,28.64,28.64,0,0,0,7.94,9.82,34.39,34.39,0,0,0,11.6,6,47.2,47.2,0,0,0,13.68,2,47.7,47.7,0,0,0,18.28-3.55,29.39,29.39,0,0,0,13.9-11.7h.42v12.75h28.83V99.94a107.89,107.89,0,0,0-2.09-22.46A39,39,0,0,0,436.91,61.08Zm-19.32,52.65a16.92,16.92,0,0,1-2,8.36,17.09,17.09,0,0,1-5.33,5.85,26.7,26.7,0,0,1-7.62,3.55,31.7,31.7,0,0,1-8.88,1.25,20.08,20.08,0,0,1-10-2.71,9,9,0,0,1-4.81-8.36,10.11,10.11,0,0,1,3.45-8.15,22.83,22.83,0,0,1,8.36-4.39A45.34,45.34,0,0,1,401,107.36q5.34-.31,8.89-.32h7.73Z" style="fill:url(#Medium_Spectrum_3)"/>
+                    <path d="M540.33,63.38h-.42a32.78,32.78,0,0,0-5-5.54,36.29,36.29,0,0,0-7.52-5.12,47.19,47.19,0,0,0-22.14-5.22A41.16,41.16,0,0,0,485.79,52,46,46,0,0,0,471.27,63.8a53.56,53.56,0,0,0-9.19,16.92,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.55,21.1,48.37,48.37,0,0,0,10.14,16.61,45.56,45.56,0,0,0,15.77,10.87,52.26,52.26,0,0,0,20.47,3.86,43,43,0,0,0,15.15-3,29.47,29.47,0,0,0,13.48-10.34h.42v9.82q0,10.86-6.79,17.86t-21.21,7a43.15,43.15,0,0,1-17.65-3.55A65.39,65.39,0,0,1,476.81,161l-17.34,25.91a60.5,60.5,0,0,0,24.23,11.8,118.88,118.88,0,0,0,26.75,3q29.67,0,44.19-14.94T569.16,143V50H540.33Zm-1.88,46.28a24.82,24.82,0,0,1-5.33,7.94,27.34,27.34,0,0,1-8,5.53,24.35,24.35,0,0,1-19.74,0,27.62,27.62,0,0,1-7.94-5.53,24.65,24.65,0,0,1,0-34.9,27.43,27.43,0,0,1,7.94-5.53,24.35,24.35,0,0,1,19.74,0,27.15,27.15,0,0,1,8,5.53,24.82,24.82,0,0,1,5.33,7.94,25,25,0,0,1,0,19Z" style="fill:url(#Medium_Spectrum_4)"/>
+                    <path d="M307.77,63.38h-.42a32.27,32.27,0,0,0-5-5.54,36.55,36.55,0,0,0-7.52-5.12,47.28,47.28,0,0,0-22.15-5.22A41.15,41.15,0,0,0,253.24,52,46.17,46.17,0,0,0,238.71,63.8a53.76,53.76,0,0,0-9.19,16.92,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.56,21.1A48.2,48.2,0,0,0,240,138.07a45.6,45.6,0,0,0,15.78,10.87,52.23,52.23,0,0,0,20.47,3.86,43,43,0,0,0,15.15-3,29.57,29.57,0,0,0,13.48-10.34h.41v9.82q0,10.86-6.78,17.86t-21.21,7a43.19,43.19,0,0,1-17.66-3.55A65.59,65.59,0,0,1,244.25,161l-17.34,25.91a60.48,60.48,0,0,0,24.24,11.8,118.79,118.79,0,0,0,26.74,3q29.67,0,44.19-14.94T336.61,143V50H307.77Zm-1.88,46.28a24.5,24.5,0,0,1-5.33,7.94,27.3,27.3,0,0,1-8,5.53,24.37,24.37,0,0,1-19.75,0,27.76,27.76,0,0,1-7.94-5.53,24.82,24.82,0,0,1-5.33-7.94,25.12,25.12,0,0,1,0-19,24.82,24.82,0,0,1,5.33-7.94,27.56,27.56,0,0,1,7.94-5.53,24.37,24.37,0,0,1,19.75,0,27.11,27.11,0,0,1,8,5.53,24.81,24.81,0,0,1,5.33,27Z" style="fill:url(#Medium_Spectrum_5)"/>
+                    <path d="M676.58,61.43A27.7,27.7,0,0,0,665.22,51.3q-7.31-3.66-19.18-3.66a35.82,35.82,0,0,0-10.43,1.46,37.33,37.33,0,0,0-8.55,3.76,30.71,30.71,0,0,0-6.46,5.23,26,26,0,0,0-3.68,5v-13H585.65V151.69h31.61V101.12a70.59,70.59,0,0,1,.63-9.6,24,24,0,0,1,2.61-8.26,15,15,0,0,1,5.73-5.85,19.28,19.28,0,0,1,9.8-2.19c4,0,7.12.83,9.28,2.51a15,15,0,0,1,4.79,6.47A28.59,28.59,0,0,1,652,92.88q.32,4.7.31,9.08v49.73h31.28v-56a116.4,116.4,0,0,0-1.46-19A41.18,41.18,0,0,0,676.58,61.43Z" style="fill:url(#Medium_Spectrum_6)"/>
+                    <path d="M779.16,50V63.38h-.41a32.78,32.78,0,0,0-5-5.54,36.29,36.29,0,0,0-7.52-5.12,47.2,47.2,0,0,0-22.15-5.22A41.27,41.27,0,0,0,724.63,52a46.12,46.12,0,0,0-14.52,11.8,53.72,53.72,0,0,0-9.19,16.93,61.08,61.08,0,0,0-3.24,19.64,60.4,60.4,0,0,0,3.55,21.1,48.6,48.6,0,0,0,10.13,16.61,45.53,45.53,0,0,0,15.78,10.86,52,52,0,0,0,20.47,3.87,43,43,0,0,0,15.15-3,29.4,29.4,0,0,0,13.48-10.34h.42v9.82q0,10.86-6.79,17.86t-21.21,7A43.19,43.19,0,0,1,731,170.56,65.54,65.54,0,0,1,715.65,161L698.3,186.86a60.61,60.61,0,0,0,24.24,11.8,118.88,118.88,0,0,0,26.75,3q29.65,0,44.19-14.94T808,143V50Zm-1.87,59.66A24.82,24.82,0,0,1,772,117.6a27.34,27.34,0,0,1-8.05,5.53,24.35,24.35,0,0,1-19.74,0,27.49,27.49,0,0,1-7.94-5.53,24.65,24.65,0,0,1,0-34.9,27.29,27.29,0,0,1,7.94-5.53,24.35,24.35,0,0,1,19.74,0A27.15,27.15,0,0,1,772,82.7a24.82,24.82,0,0,1,5.33,7.94,25.12,25.12,0,0,1,0,19Z" style="fill:url(#Medium_Spectrum_7)"/>
+                    <path d="M601.28,36.36A17.51,17.51,0,0,0,614.13,31a17.49,17.49,0,0,0,5.33-12.85,17.47,17.47,0,0,0-5.33-12.85,18.15,18.15,0,0,0-25.7,0,17.5,17.5,0,0,0-5.32,12.85A17.52,17.52,0,0,0,588.43,31,17.54,17.54,0,0,0,601.28,36.36Z" style="fill:url(#linear-gradient)"/>
+                </g>
+            </svg>
+        </div>
+        <p class="copy bigText">
+            We are a multicultural integrated group of expert leaders, partnering with other entrepreneurs to make ideas tangibly real, from the ground up. AKA an engaging company.
+        </p>
+    </section>
+
+    <div class="content">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, libero quidem aperiam, dolores mollitia fugiat laudantium optio deserunt soluta, esse repellat minus quam velit maiores culpa? Iste excepturi incidunt ullam?</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+    <!-- <script src="../../librerias/gsap.min.js"></script>
+    <script src="../../librerias/ScrollTrigger.min.js"></script> -->
+
+    <script>
+        const logo = document.querySelector(".logo-fixed")
+        const copy = document.querySelector(".intro .copy")
+        const button = document.querySelector(".bigText.button")
+        const bigTexts = document.querySelectorAll('.bigText')
+        bigTexts.forEach(bigText => {
+            bigText.style.fontSize = window.outerWidth > window.outerHeight ? `${window.outerWidth * 0.0416}px` : `${window.outerHeight * 0.035}px`
+        })
+
+        const nav = document.createElement('div')
+        nav.setAttribute('class', 'navFixed')
+        nav.setAttribute('style', `height:${( logo.getClientRects()[0].top * 2 ) + logo.getClientRects()[0].height}px`)
+        document.body.appendChild(nav)
+
+        document.querySelector('.button-fixed').style.right = `${logo.offsetLeft}px`
+        document.querySelector('.button-fixed').style.top = `${logo.offsetTop}px`
+
+        const p = document.querySelector(".copy")
+        const text = p.textContent.trim()
+        let newContent = ''
+        for (let i = 0; i < text.length; i++) {
+            newContent = `${newContent}<span>${text[i]}</span>`
+        }
+
+        p.innerHTML = newContent
+
+        const letras = p.querySelectorAll('span')
+        lineas = ''
+        position = letras[0].offsetTop
+
+        window.addEventListener('load', () => {
+            for (let i = 0, p = 0; i < letras.length; i++) {
+                const letra = letras[i]
+                if (letra.offsetTop > position) {
+                    lineas = lineas + crearNuevaLinea(p, i - 1)
+                    p = i
+                    position = letra.offsetTop
+                }
+                if (i == letras.length - 1) {
+                    lineas = lineas + crearNuevaLinea(p, i)
+                }
+            }
+
+            p.innerHTML = lineas
+            button.style.top = `calc(${copy.offsetTop + copy.offsetHeight}px - 1em)`
+
+            const rows = p.querySelectorAll('.row')
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".intro",
+                    pin: true,
+                    start: "top top",
+                    end: "300%",
+                    scrub: true,
+                    // markers: {
+                    //     startColor: "white",
+                    //     endColor: "white",
+                    //     fontSize: "18px",
+                    //     indent: 10
+                    // }
+                }
+            });
+
+            tl.to('.cover1', 1, {
+                yPercent: -150
+            }, "+0")
+            tl.to('.cover2', 1, {
+                yPercent: 150
+            }, "+0")
+            tl.to('.logo #fullColor', 0, {
+                opacity: 1
+            }, "+1")
+            tl.to('.logo #fullColor', 0, {
+                opacity: 0
+            }, "+1.3")
+
+            tl.to('.logo', 1, {
+                xPercent: 0,
+                yPercent: 0,
+                left: `${logo.offsetLeft}px`,
+                top: `${logo.offsetTop}px`,
+                scale: 0.2,
+                transformOrigin: "left top"
+            }, "+1.5")
+            tl.to('.logo', 0, {
+                opacity: 0
+            }, "+2.5")
+            tl.to('.logo-fixed', 0, {
+                opacity: 1
+            }, "+2.5")
+
+            tl.to('.copy', 0.25, {
+                opacity: 1
+            }, "+2.5")
+            tl.to('.button', 0.25, {
+                opacity: 1
+            }, "+2.5")
+
+            tl.to('.logo-fixed #big', 0.1, {
+                opacity: 0,
+                xPercent: -100
+            }, "+3")
+            tl.to('.logo-fixed #mini', 0.1, {
+                opacity: 1
+            }, "+3")
+
+            for (let i = 0; i < rows.length; i++) {
+                tl.to(rows[i], 0.25, {
+                    xPercent: i % 2 == 0 ? -20 : 20
+                }, "+3")
+            }
+
+            tl.fromTo('.button', 0.25, {
+                xPercent: 0,
+                x: `${logo.offsetLeft + button.offsetWidth}px`,
+                right: "100%"
+            }, {
+                xPercent: 50,
+                x: 0,
+                right: "50%"
+            }, "+3")
+
+
+            let tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".content",
+                    pin: false,
+                    start: "top bottom",
+                    end: window.outerWidth > window.outerHeight ? "-15%" : "-5%",
+                    scrub: true,
+                    // markers: {
+                    //     startColor: "red",
+                    //     endColor: "red",
+                    //     fontSize: "18px",
+                    //     indent: 200
+                    // }
+
+                }
+            });
+
+
+            for (let i = 0; i < rows.length; i++) {
+                tl2.to(rows[i], 1, {
+                    rotate: i % 2 == 0 ? -80 : 80,
+                    xPercent: i % 2 == 0 ? -100 : 100,
+                    transformOrigin: i % 2 == 0 ? "left" : "right"
+                }, "+0")
+            }
+
+
+
+            tl2.fromTo('.button', 1.5, {
+                xPercent: 50,
+                right: "50%"
+            }, {
+                xPercent: 0,
+                right: `calc(${logo.offsetLeft}px + (1em * 0.3))`,
+                top: `calc(${logo.offsetTop}px + (0.5em * 0.3))`,
+                scale: 0.3,
+                transformOrigin: "right top"
+            }, "+0")
+
+            tl2.to(".button", 0, {
+                opacity: 0,
+            }, "+1.5")
+            tl2.to(".button-fixed", 0, {
+                opacity: 1
+            }, "+1.5")
+            tl2.to(".navFixed", 0, {
+                opacity: 1
+            }, "+1.5")
+        });
+
+
+
+
+        function crearNuevaLinea(inicio, fin) {
+            let linea = ''
+            for (let i = inicio; i <= fin; i++) {
+                linea = `${linea}${letras[i].textContent}`
+            }
+            return `<span class="row">${linea}</span>`
+        }
+    </script>
+
+</body>
+
+</html>
