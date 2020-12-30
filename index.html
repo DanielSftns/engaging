@@ -150,7 +150,7 @@
     </style>
 
 
-    <div class="sreenBlack" style="width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 100; background-color: #000;"></div>
+    <div class="screenBlack" style="width: 100%; height: 100vh; position: fixed; top: 0; left: 0; z-index: 100; background-color: #000;"></div>
     <div class="logo-fixed">
         <svg id="big" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 808 201.69">
             <g>
@@ -264,54 +264,72 @@
         const copy = document.querySelector(".intro .copy")
         const button = document.querySelector(".bigText.button")
         const bigTexts = document.querySelectorAll('.bigText')
-        bigTexts.forEach(bigText => {
-            bigText.style.fontSize = window.outerWidth > window.outerHeight ? `${window.outerWidth * 0.0416}px` : `${window.outerHeight * 0.035}px`
-        })
-
-        const nav = document.createElement('div')
-        nav.setAttribute('class', 'navFixed')
-        nav.setAttribute('style', `height:${( logo.getClientRects()[0].top * 2 ) + logo.getClientRects()[0].height}px`)
-        document.body.appendChild(nav)
-
-        document.querySelector('.button-fixed').style.right = `${logo.offsetLeft}px`
-        document.querySelector('.button-fixed').style.top = `${logo.offsetTop}px`
-
         const p = document.querySelector(".copy")
         const text = p.textContent.trim()
-        let newContent = ''
-        for (let i = 0; i < text.length; i++) {
-            newContent = `${newContent}<span>${text[i]}</span>`
-        }
+        let letras
+        let tl
+        let tl2
+        let scrollY = 0
 
-        p.innerHTML = newContent
-
-        const letras = p.querySelectorAll('span')
-        lineas = ''
-        position = letras[0].offsetTop
+        step1()
 
         let auto = gsap.timeline()
         auto.pause()
 
         button.addEventListener('click', linkScroll)
 
-        function linkScroll() {
-            gsap.to(window, {
-                duration: 2,
-                scrollTo: ".content",
-                ease: Cubic.linear
+        window.addEventListener('load', step2, true);
+
+        window.addEventListener('resize', () => {
+            step1()
+            tl.scrollTrigger.disable()
+            tl2.scrollTrigger.disable()
+            step2()
+        });
+
+        document.addEventListener('scroll', (e) => {
+            scrollY = window.scrollY
+        })
+
+        function step1() {
+            bigTexts.forEach(bigText => {
+                bigText.style.fontSize = window.outerWidth > window.outerHeight ? `${window.outerWidth * 0.0416}px` : `${window.outerHeight * 0.035}px`
             })
+
+            let nav = document.querySelector('.navFixed')
+            if (!nav) {
+                nav = document.createElement('div')
+                nav.setAttribute('class', 'navFixed')
+                document.body.appendChild(nav)
+            }
+
+            nav.setAttribute('style', `height:${( logo.getClientRects()[0].top * 2 ) + logo.getClientRects()[0].height}px`)
+
+            document.querySelector('.button-fixed').style.right = `${logo.offsetLeft}px`
+            document.querySelector('.button-fixed').style.top = `${logo.offsetTop}px`
+
+            let newContent = ''
+            for (let i = 0; i < text.length; i++) {
+                newContent = `${newContent}<span>${text[i]}</span>`
+            }
+
+            p.innerHTML = newContent
         }
 
-        window.addEventListener('load', () => {
+        function step2(reset) {
+            letras = p.querySelectorAll('span')
+            lineas = ''
+            position = letras[0].offsetTop
+
             for (let i = 0, p = 0; i < letras.length; i++) {
                 const letra = letras[i]
                 if (letra.offsetTop > position) {
-                    lineas = lineas + crearNuevaLinea(p, i - 1)
+                    lineas = lineas + newLineInCopy(p, i - 1)
                     p = i
                     position = letra.offsetTop
                 }
                 if (i == letras.length - 1) {
-                    lineas = lineas + crearNuevaLinea(p, i)
+                    lineas = lineas + newLineInCopy(p, i)
                 }
             }
 
@@ -319,7 +337,7 @@
             button.style.top = `calc(${copy.offsetTop + copy.offsetHeight}px - 1em)`
 
             const rows = p.querySelectorAll('.row')
-            let tl = gsap.timeline({
+            tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".intro",
                     pin: true,
@@ -328,12 +346,18 @@
                     scrub: true
                 }
             });
-            setTimeout(() => {
-                tl.scrollTrigger.scroll(0)
-                document.querySelector('.sreenBlack').remove()
-                auto.play()
-            }, 200);
-
+            if (reset) {
+                setTimeout(() => {
+                    tl.scrollTrigger.scroll(0)
+                    const screenBlack = document.querySelector('.screenBlack')
+                    if (screenBlack) {
+                        screenBlack.remove()
+                    }
+                    auto.play()
+                }, 200);
+            } else {
+                tl.scrollTrigger.scroll(scrollY)
+            }
 
             auto.to('.cover1', 1, {
                 yPercent: -150
@@ -395,7 +419,7 @@
             }, "+0")
 
 
-            let tl2 = gsap.timeline({
+            tl2 = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".content",
                     pin: false,
@@ -435,14 +459,22 @@
             tl2.to(".navFixed", 0, {
                 opacity: 1
             }, "+1.5")
-        });
+        }
 
-        function crearNuevaLinea(inicio, fin) {
+        function newLineInCopy(inicio, fin) {
             let linea = ''
             for (let i = inicio; i <= fin; i++) {
                 linea = `${linea}${letras[i].textContent}`
             }
             return `<span class="row">${linea}</span>`
+        }
+
+        function linkScroll() {
+            gsap.to(window, {
+                duration: 2,
+                scrollTo: ".content",
+                ease: Cubic.linear
+            })
         }
     </script>
 
